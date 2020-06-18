@@ -77,7 +77,7 @@ $pieNoasig      =   $noasig/$total   * 100;
                       <a href="<?=base_url()?>index.php?/ticket/nuevo_ticket">
                         <div class="card bg-warning">
                             <div class="card-body">
-                                <h2 class="text-white">Nuevo Ticket <i class="ti-ticket float-right"></i></h2>
+                                <h2 class="text-white">Solicitar Prestamo <i class="ti-ticket float-right"></i></h2>
                                 <div class="text-white mt-1"><i class="ti-stats-up mr-1"></i><small>Reporte un nuevo incidente</small></div>
                             </div>
                             <div class="progress mb-2 widget-dark-progress">
@@ -88,10 +88,10 @@ $pieNoasig      =   $noasig/$total   * 100;
                     </div>
 
                     <div class="col-lg-3 col-md-6 mb-4">
-                      <a href="<?=base_url()?>index.php?/ticket/lista_tickets">
+                      <a href="<?=base_url()?>index.php?/biblio/acervo">
                         <div class="card bg-info">
                             <div class="card-body">
-                                <h2 class="text-white">Mis Tickets <i class="ti-list float-right"></i></h2>
+                                <h2 class="text-white">Acervo <i class="ti-list float-right"></i></h2>
                                 <div class="text-white mt-1"><i class="ti-stats-up mr-1"></i><small> Revise todos los Tickets</small></div>
                             </div>
                             <div class="progress mb-2 widget-dark-progress">

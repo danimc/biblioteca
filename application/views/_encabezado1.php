@@ -19,7 +19,7 @@ $usuario = $this->m_usuario->obt_usuario($codigo);
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Incidencias OAG</title>
+    <title> AG BIBLIOTECA | <?=$title?></title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link href="<?=base_url()?>src/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -62,8 +62,8 @@ $usuario = $this->m_usuario->obt_usuario($codigo);
     <div class="page-wrapper">
         <header class="header">
             <div class="page-brand">
-                <a href="/incidencias">
-                    <span class="brand">sistematización</span>
+                <a href="<?=base_url()?>">
+                    <span class="brand">AG BIBLIOTECA</span>
                     <span class="brand-mini">OAG</span>
                 </a>
             </div>
@@ -130,11 +130,6 @@ $usuario = $this->m_usuario->obt_usuario($codigo);
                                 </a>
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <a class="nav-link quick-sidebar-toggler">
-                            <span class="ti-align-right"></span>
-                        </a>
                     </li>
                 </ul>
                 <!-- END TOP-RIGHT TOOLBAR-->

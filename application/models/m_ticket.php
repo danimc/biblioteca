@@ -485,7 +485,7 @@ class m_ticket extends CI_Model {
               function etiqueta($estatus)
     {
         if($estatus == 1){
-            $esta = ' <span data-toggle="modal" data-target="#modalStatus" class="btn badge btn-primary badge-pill mb-2"><i class="fa fa-ticket"></i> Abierto</span>';
+            $esta = ' <i class="fa fa-check" style="color: green;"></i> Disponible';
             return $esta;
         }
         if($estatus == 2){
