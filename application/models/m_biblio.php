@@ -36,5 +36,10 @@ class m_biblio extends CI_Model {
         return $this->db->query($qry)->result();
     }
 
+    function obt_categorias()
+    {
+        return $this->db->get('Tb_Cat_categoriasLibros')->result();
+    }
+
   
 }

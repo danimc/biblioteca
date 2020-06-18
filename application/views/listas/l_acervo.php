@@ -5,13 +5,22 @@ $estados = $this->m_ticket->estatus();
  <div class="content-wrapper">
   <!-- Content Header (Page header) -->
  <div class="page-heading">
-                <h1 class="page-title">Acervo de la Oficina del Abogado General</h1>
-                <br>
+
+ <div class="flexbox-b mb-5 page-title">
+            <span class="mr-4 static-badge badge-warning"><i class="ti-book"></i></span>
+            <div>
+                <h5 class="font-strong">Acervo de la Oficia del Abogado General</h5>
+                       
+            </div>
+  </div>
+               
     <a href="<?=base_url()?>" class="btn btn-blue btn-icon-only btn-lg"><i class="fa fa-arrow-left"></i></a>
     <a href="<?=base_url()?>index.php?/biblio/nuevo" class="btn btn-warning btn-icon-only btn-lg "><span class="fa fa-plus"></span></a>
     </div>
   <!-- Main content -->
   <section class="page-content fade-in-up">
+
+
 
     <div class="ibox">
                     <div class="ibox-body">
@@ -19,16 +28,17 @@ $estados = $this->m_ticket->estatus();
                         <div class="flexbox mb-4">
                             <div class="flexbox">
                                 <label class="mb-0 mr-2">Filtrar por:</label>
-                                <div class="btn-group bootstrap-select show-tick form-control" style="width: 150px;">
+                                <div class="btn-group bootstrap-select show-tick form-control" style="width: 250px;">
 
-                                  <select class="selectpicker show-tick form-control" id="type-filter" title="Please select" data-style="btn-solid" data-width="150px" tabindex="-98">
+                                  <select class="selectpicker show-tick form-control" id="type-filter" title="Please select" data-style="btn-solid" data-width="250px" tabindex="-98">
                                     <option class="bs-title-option" value="">Seleccione una opción</option>
                                     <option value="">Todos</option>
-                                    <option>Abierto</option>
-                                    <option>En Proceso</option>
-                                    <option>Resuelto</option>
-                                    <option>Cerrado</option>
-                                </select></div>
+                                    <? foreach($categorias as $c) {?>
+                                      <option><?=$c->categoria?></option>
+                                    <?}?>
+                                   
+                                  </select>
+                              </div>
                             </div>
                             <div class="input-group-icon input-group-icon-left mr-3">
                                 <span class="input-icon input-icon-right font-16"><i class="ti-search"></i></span>
@@ -111,7 +121,7 @@ $estados = $this->m_ticket->estatus();
                 table.search(this.value).draw();
             });
             $('#type-filter').on('change', function() {
-                table.column(2).search($(this).val()).draw();
+                table.column(3).search($(this).val()).draw();
             });
         });
     </script>

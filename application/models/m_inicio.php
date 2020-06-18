@@ -9,23 +9,23 @@ class m_inicio extends CI_Model {
 
     function obt_contador_total()
     {
-        return $this->db->get('ticket')->num_rows();
+        return $this->db->get('Tb_Libros')->num_rows();
     }
     function obt_contador_cerrados()
     {
-        $this->db->where('estatus', 5);
-        return $this->db->get('ticket')->num_rows();
+        $this->db->where('estatus', 1);
+        return $this->db->get('Tb_Libros')->num_rows();
     }
     function obt_contador_abiertos()
     {
-        $this->db->where('estatus !=', 5);
-        return $this->db->get('ticket')->num_rows();
+        $this->db->where('estatus !=', 1);
+        return $this->db->get('Tb_Libros')->num_rows();
     }
     function obt_contador_noAsignados()
     {
         $this->db->where('estatus', 1);
         $this->db->or_where('estatus', 9);
-        return $this->db->get('ticket')->num_rows();
+        return $this->db->get('Tb_Libros')->num_rows();
     }
 
     function obt_diaHoy($fecha)

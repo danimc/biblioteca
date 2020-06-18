@@ -20,14 +20,27 @@ class Biblio extends CI_Controller {
     function acervo()
     {
         $head['title'] = "ACERVO DE LA OFICINA DEL ABOGADO GENERAL";
-        $datos['libros'] = $this->m_biblio->obt_acervo();
+        $datos['categorias']    = $this->m_biblio->obt_categorias();
+        $datos['libros']        = $this->m_biblio->obt_acervo();
 
         $this->load->view('_encabezado1', $head);
         $this->load->view('_menuLateral1');
         $this->load->view('listas/l_acervo', $datos);
         $this->load->view('_footer1');
-        
-
+  
     }
+
+    function prestamo()
+    {
+        $head['title'] = "ACERVO DE LA OFICINA DEL ABOGADO GENERAL";
+        $datos['categorias']    = $this->m_biblio->obt_categorias();
+        $datos['libros']        = $this->m_biblio->obt_acervo();
+
+        $this->load->view('_encabezado1', $head);
+        $this->load->view('_menuLateral1');
+        $this->load->view('listas/l_acervo', $datos);
+        $this->load->view('_footer1');
+    }
+
 
 }

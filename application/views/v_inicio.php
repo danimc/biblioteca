@@ -14,20 +14,20 @@ $pieNoasig      =   $noasig/$total   * 100;
     ?> 
     
       <div class="row mb-4">
-                 <div class="col-lg-3 col-md-6">
+                 <div class="col">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
                             <div class="easypie mr-4" data-percent="100" data-bar-color="#a4daff" data-size="80" data-line-width="8">
-                                <span class="easypie-data text-blue" style="font-size:32px;"><i class="la la-ticket"></i></span>
+                                <span class="easypie-data text-blue" style="font-size:32px;"><i class="la la-book"></i></span>
                             </div>
                             <div>
                                 <h3 class="font-strong text-blue"><?=$total?></h3>
-                                <div class="text-muted">INCIDENTES REPORTADOS</div>
+                                <div class="text-muted">TOTAL DE LIBROS</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                 <div class="col-lg-3 col-md-6">
+                 <div class="col">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
                             <div class="easypie mr-4" data-percent="<?=$pieResuletos?>" data-bar-color="#006815" data-size="80" data-line-width="8">
@@ -35,25 +35,26 @@ $pieNoasig      =   $noasig/$total   * 100;
                             </div>
                             <div>
                                 <h3 class="font-strong text-success"><?=$cerrados?></h3>
-                                <div class="text-muted">INCIDENTES RESUELTOS</div>
+                                <div class="text-muted">LIBROS DISPONIBLES</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                 <div class="col-lg-3 col-md-6">
+                 <div class="col">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="<?=$pieAbiertos?>" data-bar-color="#ff4081" data-size="80" data-line-width="8">
-                                <span class="easypie-data text-pink" style="font-size:32px;"><i class="la la-tags"></i></span>
+                            <div class="easypie mr-4" data-percent="<?=$pieAbiertos?>" data-bar-color="#f39c12" data-size="80" data-line-width="8">
+                                <span class="easypie-data text-warning" style="font-size:32px;"><i class="la la-exclamation"></i></span>
                             </div>
                             <div>
-                                <h3 class="font-strong text-pink"><?=$abiertos?></h3>
-                                <div class="text-muted">INCIDENTES PENDIENTES</div>
+                                <h3 class="font-strong text-warning"><?=$abiertos?></h3>
+                                <div class="text-muted">LIBROS PRESTADOS</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!--
+                <div class="col">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
                             <div class="easypie mr-4" data-percent="<?=$pieNoasig?>" data-bar-color="#f39c12" data-size="80" data-line-width="8">
@@ -66,6 +67,7 @@ $pieNoasig      =   $noasig/$total   * 100;
                         </div>
                     </div>
                 </div>
+    -->
         </div>
          <?
                }
@@ -73,12 +75,12 @@ $pieNoasig      =   $noasig/$total   * 100;
 <!-- BOTONES DE ACCION -->
     <div class="row">
         
-                    <div class="col-lg-3 col-md-6 mb-4">
-                      <a href="<?=base_url()?>index.php?/ticket/nuevo_ticket">
+                    <div class="col mb-4">
+                      <a href="<?=base_url()?>index.php?/biblio/prestamo">
                         <div class="card bg-warning">
                             <div class="card-body">
-                                <h2 class="text-white">Solicitar Prestamo <i class="ti-ticket float-right"></i></h2>
-                                <div class="text-white mt-1"><i class="ti-stats-up mr-1"></i><small>Reporte un nuevo incidente</small></div>
+                                <h2 class="text-white">Prestamo <i class="ti-book float-right"></i></h2>
+                                <div class="text-white mt-1"><i class="ti-stats-up mr-1"></i><small>solicitar un nuevo prestamo</small></div>
                             </div>
                             <div class="progress mb-2 widget-dark-progress">
                                 <div class="progress-bar" role="progressbar" style="width:100%; height:5px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -87,12 +89,12 @@ $pieNoasig      =   $noasig/$total   * 100;
                           </a>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 mb-4">
-                      <a href="<?=base_url()?>index.php?/biblio/acervo">
+                    <div class="col mb-4">
+                      <a href="<?=base_url()?>index.php?/biblio/lista_tickets">
                         <div class="card bg-info">
                             <div class="card-body">
                                 <h2 class="text-white">Acervo <i class="ti-list float-right"></i></h2>
-                                <div class="text-white mt-1"><i class="ti-stats-up mr-1"></i><small> Revise todos los Tickets</small></div>
+                                <div class="text-white mt-1"><i class="ti-stats-up mr-1"></i><small> Revise todo el acervo de libros de la OAG</small></div>
                             </div>
                             <div class="progress mb-2 widget-dark-progress">
                                 <div class="progress-bar" role="progressbar" style="width:100%; height:5px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -100,7 +102,7 @@ $pieNoasig      =   $noasig/$total   * 100;
                         </div>
                           </a>
                     </div> 
-
+<!--
         <?  $accesoUsr = $this->m_seguridad->acceso_modulo(1);
             if($accesoUsr != 0){
         ?>
@@ -132,10 +134,11 @@ $pieNoasig      =   $noasig/$total   * 100;
             </div>
             </a>
         </div>
-
+            -->
 
         <?
             }
+
 
             $accesoActivos = $this->m_seguridad->acceso_modulo(2);
             if ($accesoActivos != 0) {
@@ -172,11 +175,11 @@ $pieNoasig      =   $noasig/$total   * 100;
 
     </div> 
 <!-- TABLAS --->
-                   <div class="row">
-                    <div class="col-xl-7">
-                        <div class="ibox ibox-fullheight">
-                            <div class="ibox-head">
-                                <div class="ibox-title">TICKETS ASIGNADOS  </div>
+    <div class="row">
+        <div class="col-xl-7">
+            <div class="ibox ibox-fullheight">
+               <div class="ibox-head">
+                    <div class="ibox-title">TICKETS ASIGNADOS  </div>
                                 <div class="ibox-tools">
                                     <a class="dropdown-toggle font-18" data-toggle="dropdown"><i class="ti-ticket"></i></a>
                                     <div class="dropdown-menu dropdown-menu-right">
