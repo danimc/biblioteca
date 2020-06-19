@@ -19,10 +19,12 @@ class Biblio extends CI_Controller {
     
     function prestamo()
     {
-        $head['title'] = "ACERVO DE LA OFICINA DEL ABOGADO GENERAL";
+        $head['title'] = "NUEVO PRESTAMO";
         //$datos['categorias']    = $this->m_biblio->obt_categorias();
-        $datos['libros']        = $this->m_biblio->obt_acervo();
-        $datos['usuarios']      = $this->m_usuario->obt_usuarios();    
+        $codigo = $this->session->userdata("codigo");	
+		$datos['usuario'] = $this->m_usuario->obt_usuario($codigo);
+		$datos['reportantes'] = $this->m_ticket->obt_lista_usuarios();
+        $datos['libros']        = $this->m_biblio->obt_acervo();   
 
         $this->load->view('_encabezado1', $head);
         $this->load->view('_menuLateral1');

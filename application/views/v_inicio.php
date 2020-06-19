@@ -98,7 +98,7 @@ $pieNoasig      =   $noasig/$total   * 100;
             </div>
 
             <div class="col mb-4">
-                <a href="<?=base_url()?>index.php?/biblio/lista_tickets">
+                <a href="<?=base_url()?>index.php?/biblio/acervo">
                     <div class="card bg-info">
                         <div class="card-body">
                             <h2 class="text-white">Acervo <i class="ti-list float-right"></i></h2>
