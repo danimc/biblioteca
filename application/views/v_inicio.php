@@ -205,7 +205,7 @@ $pieNoasig      =   $noasig/$total   * 100;
                                 <tr>
                                     <td>1</td>
                                     <td>Mora Carbajal Luis Daniel</td>
-                                    <td>12 de Julio 2020</td>
+                                    <td>12 de Junio 2020</td>
                                     <td>1</td>
                                     <td>30 Junio 2020</td>
                                 </tr>

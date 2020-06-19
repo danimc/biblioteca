@@ -87,7 +87,8 @@ $estados = $this->m_ticket->estatus();
                                       <td ><?=$l->categoria?></td>
                                       <td data-toggle="tooltip"><?=$estatus?></td>
                                       <td><?=$l->ubicacion?></td>
-                                      <td width="10" align="center"><a class="btn btn-primary " href="<?=base_url()?>index.php?/l/seguimiento/<?=$l->consecutivo?>"  title="Información"><i class="fa fa-info"></i> </a>
+                                      <td width="10" align="center">
+                                        <a class="btn btn-sm " href="<?=base_url()?>index.php?/l/seguimiento/<?=$l->consecutivo?>" data-toggle="tooltip" title="Información"><i class="fa fa-info text-pink"></i></a>
                                       </td>
                                     </tr>
                                   <?
