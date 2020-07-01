@@ -16,7 +16,6 @@
             <span class="mr-4 static-badge badge-warning"><i class="ti-share"></i></span>
             <div>
                 <h5 class="font-strong">Solicitar un nuevo Prestamo</h5>
-
             </div>
         </div>
         <br>
@@ -29,7 +28,7 @@
         <section class="page-content fade-in-up">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="ibox ibox-fullheight">
+                    <div class="ibox">
                         <div class="ibox-head">
                             <div class="ibox-title">Datos del Solicitante</div>
                         </div>
@@ -38,14 +37,13 @@
                                 <div class="form-group mb-6 col-md-12 ">
                                     <label class="col-sm-12 col-form-label">Usuario: </label>
                                     <div class="col-sm-12">
-                                        <select class="form-control selectpicker col-sm-12" id="usrIncidente"
-                                            data-live-search="true" name="usrIncidente">
-                                            <option value="<?=$usuario->codigo?>">
-                                                <?=$usuario->usuario?> => <?=$usuario->nombre_completo?>
+                                        <select class="form-control selectpicker col-sm-12" id="usrIncidente" data-live-search="true" name="usrIncidente">
+                                            <option value="<?= $usuario->codigo ?>">
+                                                <?= $usuario->usuario ?> => <?= $usuario->nombre_completo ?>
                                             </option>
                                             <? foreach ($reportantes as $reportante) {?>
-                                            <option value="<?=$reportante->codigo?>">
-                                                <?=$reportante->usuario?> => <?=$reportante->nombre_completo?>
+                                            <option value="<?= $reportante->codigo ?>">
+                                                <?= $reportante->usuario ?> => <?= $reportante->nombre_completo ?>
                                             </option>
                                             <?  } ?>
                                         </select>
@@ -56,90 +54,149 @@
                     </div>
                 </div>
 
-           
 
-            <div class="col-md-7">
-                <div class="ibox ibox-fullheight">
-                    <div class="ibox-body">
-                        <div class="row">
-                             <div class="form-group col-md-12">
+
+                <div class="col-md-7">
+                    <div class="ibox ibox-fullheight">
+                        <div class="ibox-body">
+                            <div class="row">
+                                <div class="form-group col-md-12">
                                     <label>Consecutivo</label>
-                                        <div class="input-group">
+                                    <div class="input-group">
                                         <input type="number" required="true" name="consecutivo" id="consecutivo" class="form-control-sm col-md-3">
                                         <span class="input-group-btn">
-                                          <button type="button" class="btn btn-outline-info"><i class="fa fa-search"></i></button>
+                                            <button type="button" class="btn btn-outline-info"><i class="fa fa-search"></i></button>
                                         </span>
-                                      </div>
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Titulo</label>
                                     <input type="text" name="titulo" id="titulo" class="form-control">
                                 </div>
-                            <div id="infoLibro"></div>
+                                <div id="infoLibro">
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-12">
+                                            <b>Autor: </b> <span id="txtAutor"></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <b>Editorial: </b> <span id="txtEditorial"></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <b>Categoría: </b> <span id="txtCategoria"></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <b>Estatus: </b> <span id="txtEstatus"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <a href="#" id="btnAgregar" class="btn btn-block btn-success"> Agregar </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="col-md-10">
-                <div class="ibox">
-                    <div class="ibox-head">
-                        <div class="ibox-title">
-                            Lista de ejemplares a prestar
+                <div class="col-md-10">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">
+                                Lista de ejemplares a prestar
+                            </div>
                         </div>
-                    </div>
-                    <div class="ibox-body">
-                        <div class="row">
-                            <table class="table table-responsive table-hover">
-                                <tr>
-                                    <th> Cons.</th>
-                                    <th>Titulo</th>
-                                    <th>Autor</th>
-                                    <th>Editorial</th>
-                                    <th>Categoria</th>
-                                    <th>Acciones</th>
-                                </tr>
-                                <tr>
-                                    <div id="pedido"></div>
-                                </tr>
-                                
-                            </table>
-                            
+                        <div class="ibox-body">
+                            <div class="row">
+                                <table class="table table-responsive table-hover">
+                                    <tr>
+                                        <th> Cons.</th>
+                                        <th>Titulo</th>
+                                        <th>Autor</th>
+                                        <th>Editorial</th>
+                                        <th>Categoria</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    <tr>
+                                        <div id="pedido"></div>
+                                    </tr>
+
+                                </table>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-</section>
+        </section>
 
-<div class="modal fade" id="cerrar" role="dialog">
-    <div class="modal-dialog col-md">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="icon" align="center">
-                    <i class="fa fa-spinner fa-spin" style="font-size:80px;"></i>
+        <div class="modal fade" id="cerrar" role="dialog">
+            <div class="modal-dialog col-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="icon" align="center">
+                            <i class="fa fa-spinner fa-spin" style="font-size:80px;"></i>
+                        </div>
+
+                        <h4 align="center">Generando Ticket de Servicio...</h4>
+                    </div>
+
                 </div>
-
-                <h4 align="center">Generando Ticket de Servicio...</h4>
             </div>
-
         </div>
-    </div>
-</div>
 
-<!-- /.content -->
+        <!-- /.content -->
 
-<!-- /.content-wrapper -->
-<script>
-$(function() {
-    $('#summernote').summernote({
-        height: 100
-    });
-});
-</script>
+        <!-- /.content-wrapper -->
+        <script>
+            $(function() {
+                $('#summernote').summernote({
+                    height: 100
+                });
+            });
+        </script>
 
-<!-- <script>
+        <script>
+            $("#consecutivo").change(function() {
+                busqueda = $("#consecutivo").val();
+                datos = {
+                    busqueda
+                };
+
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json',
+                    url: '<?= base_url() ?>index.php/biblio/obt_libro',
+                    data: datos,
+                }).done(function(respuesta) {
+                    llenarDatos(respuesta);
+
+                })
+            });
+
+            function llenarDatos(respuesta) 
+            {
+                estatus = '';
+                
+                if(respuesta.estatus == 1){
+                    estatus = "<i class='fa fa-check' style='color: green;'></i> Disponible";
+                    $("#btnAgregar").removeClass('disabled'); 
+                }
+                else {
+                    estatus = "sin definir";
+                    $("#btnAgregar").addClass('disabled'); 
+                }           
+                
+            
+                $("#titulo").val(respuesta.titulo);
+                $("#txtAutor").html(respuesta.autor);
+                $("#txtCategoria").html(respuesta.categoria);
+                $("#txtEditorial").html(respuesta.editorial);
+                $("#txtEstatus").html(estatus);
+            }
+        </script>
+
+        <!-- <script>
     $("#nombre").change(function () {   
         busqueda = $("#nombre").val();
         datos = { busqueda : busqueda,
@@ -147,7 +204,7 @@ $(function() {
         $.ajax({
         type: "POST",
         dataType: 'json',
-        url: '<?=base_url()?>index.php/usuario/obt_usuario',
+        url: '<?= base_url() ?>index.php/usuario/obt_usuario',
         data: datos,
           }).done(function(respuesta){
             $("#usrIncidente").val(respuesta.codigo);

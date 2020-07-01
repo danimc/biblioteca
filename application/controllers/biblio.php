@@ -24,7 +24,7 @@ class Biblio extends CI_Controller {
         $codigo = $this->session->userdata("codigo");	
 		$datos['usuario'] = $this->m_usuario->obt_usuario($codigo);
 		$datos['reportantes'] = $this->m_ticket->obt_lista_usuarios();
-        $datos['libros']        = $this->m_biblio->obt_acervo();   
+       // $datos['libros']        = json_encode($this->m_biblio->obt_acervo());   
 
         $this->load->view('_encabezado1', $head);
         $this->load->view('_menuLateral1');
@@ -43,6 +43,14 @@ class Biblio extends CI_Controller {
         $this->load->view('_menuLateral1');
         $this->load->view('listas/l_acervo', $datos);
         $this->load->view('_footer1');
+    }
+
+    public function obt_libro()
+    {
+        $busqueda = $this->input->get('busqueda');
+        $respuesta = $this->m_biblio->obt_libroConsecutivo($busqueda);
+        
+        echo json_encode($respuesta);
     }
 
 
