@@ -69,5 +69,16 @@ class m_biblio extends CI_Model {
         return $this->db->get('Tb_Cat_categoriasLibros')->result();
     }
 
+    function agregarPedido($pedido)
+    {
+        $this->db->insert('tb_solicitudPedidos', $pedido);
+    }
+
+    function obt_Pedido()
+    {
+        $this->db->where('pedido', null);
+        return $this->db->get('tb_solicitudPedidos')->result();
+    }
+
   
 }

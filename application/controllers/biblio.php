@@ -49,8 +49,26 @@ class Biblio extends CI_Controller {
     {
         $busqueda = $this->input->get('busqueda');
         $respuesta = $this->m_biblio->obt_libroConsecutivo($busqueda);
-        
+
         echo json_encode($respuesta);
+    }
+
+    function agregarPedido()
+    {
+        $libro = $this->input->post('libro');       
+        $pedido = array(
+                        'libro'         => $libro,
+                        'fecha'         => $this->m_ticket->fecha_actual(),
+                        'capturista'    => $this->session->userdata('codigo')
+        );
+
+        $this->m_biblio->agregarPedido($pedido);
+    }
+
+    function obtPedido()
+    {
+        $pedido = $this->m_biblio->obt_Pedido();
+        echo json_encode($pedido);
     }
 
 

@@ -28,7 +28,7 @@
         <section class="page-content fade-in-up">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="ibox">
+                    <div class="ibox ibox-fullheight">
                         <div class="ibox-head">
                             <div class="ibox-title">Datos del Solicitante</div>
                         </div>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-
+                <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="ibox">
                         <div class="ibox-head">
@@ -130,30 +130,14 @@
 
         </section>
 
-        <div class="modal fade" id="cerrar" role="dialog">
-            <div class="modal-dialog col-md">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="icon" align="center">
-                            <i class="fa fa-spinner fa-spin" style="font-size:80px;"></i>
-                        </div>
-
-                        <h4 align="center">Generando Ticket de Servicio...</h4>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
         <!-- /.content -->
 
         <!-- /.content-wrapper -->
+
         <script>
             $(function() {
-                $('#summernote').summernote({
-                    height: 100
-                });
-            });
+                obtPedido();
+            })
         </script>
 
         <script>
@@ -170,29 +154,79 @@
                     data: datos,
                 }).done(function(respuesta) {
                     llenarDatos(respuesta);
-
                 })
             });
 
-            function llenarDatos(respuesta) 
-            {
-                estatus = '';
-                
-                if(respuesta.estatus == 1){
-                    estatus = "<i class='fa fa-check' style='color: green;'></i> Disponible";
-                    $("#btnAgregar").removeClass('disabled'); 
+            $("#btnAgregar").click(function() {
+                libro = $("#consecutivo").val();
+                data = {
+                    libro
+                };
+
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: '<?= base_url() ?>index.php/biblio/agregarPedido',
+                    data,
+                }).done(function(respuesta) {
+                    llenarDatos(falso = '');
+                })
+            })
+
+            function llenarDatos(respuesta) {
+
+                estatus = obt_estatus(respuesta.estatus);
+
+                if (respuesta != '') {
+
+                    $("#titulo").val(respuesta.titulo);
+                    $("#txtAutor").html(respuesta.autor);
+                    $("#txtCategoria").html(respuesta.categoria);
+                    $("#txtEditorial").html(respuesta.editorial);
+                    $("#txtEstatus").html(estatus);
+                } else {
+                    $("#titulo").val('');
+                    $("#txtAutor, #txtCategoria, #txtCategoria,#txtEditorial, #txtEstatus ").html('');
                 }
-                else {
+
+            }
+
+            function obt_estatus(valor) {
+                estatus = '';
+
+                if (valor == 1) {
+                    estatus = "<i class='fa fa-check' style='color: green;'></i> Disponible";
+                    $("#btnAgregar").removeClass('disabled');
+                } else {
                     estatus = "sin definir";
-                    $("#btnAgregar").addClass('disabled'); 
-                }           
-                
-            
-                $("#titulo").val(respuesta.titulo);
-                $("#txtAutor").html(respuesta.autor);
-                $("#txtCategoria").html(respuesta.categoria);
-                $("#txtEditorial").html(respuesta.editorial);
-                $("#txtEstatus").html(estatus);
+                    $("#btnAgregar").addClass('disabled');
+                }
+                return estatus;
+            }
+
+            function obtPedido() {
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json',
+                    url: '<?= base_url() ?>index.php/biblio/obtPedido',
+                }).done(function(respuesta) {
+                    llenarDatos(falso = '');
+
+                    html = '';
+                    $.each(respuesta, function(i, v) {
+                        html += '<tr>' +
+                            '<td>' + v.folio + '</td>' +
+                            '<td>' + v.forma + '</td>' +
+                            '<td>' + fecha + '</td>' +
+                            '<td>' + v.fecha_inicio + '</td>' +
+                            '<td>' + v.departamento + '</td>' +
+                            '<td>' + v.titulo + '</td>' +
+                            '<td>' + v.categoria + '</td>' +
+                            '<td>' + v.id_situacion + '</td>' +
+                            '</tr>';
+                    })
+
+                })
             }
         </script>
 
