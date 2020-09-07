@@ -117,13 +117,13 @@
                                         <th>Categoria</th>
                                         <th>Acciones</th>
                                     </tr>
-                                    <tr>
-                                        <div id="pedido"></div>
-                                    </tr>
-
+                                    <tbody id="pedido">
+                                    </tbody>
                                 </table>
-
                             </div>
+                        </div>
+                        <div class="ibox-footer">
+                            <a class="btn btn-success"> Solicitar Prestamo</a> 
                         </div>
                     </div>
                 </div>
@@ -169,7 +169,9 @@
                     url: '<?= base_url() ?>index.php/biblio/agregarPedido',
                     data,
                 }).done(function(respuesta) {
-                    llenarDatos(falso = '');
+                    //alert('hola');
+                    obtPedido();
+                    llenarDatos(falso = '');                    
                 })
             })
 
@@ -210,21 +212,20 @@
                     dataType: 'json',
                     url: '<?= base_url() ?>index.php/biblio/obtPedido',
                 }).done(function(respuesta) {
-                    llenarDatos(falso = '');
-
+                   
                     html = '';
                     $.each(respuesta, function(i, v) {
                         html += '<tr>' +
-                            '<td>' + v.folio + '</td>' +
-                            '<td>' + v.forma + '</td>' +
-                            '<td>' + fecha + '</td>' +
-                            '<td>' + v.fecha_inicio + '</td>' +
-                            '<td>' + v.departamento + '</td>' +
+                            '<td>' + v.consecutivo + '</td>' +
                             '<td>' + v.titulo + '</td>' +
+                            '<td>' + v.autor + '</td>' +
+                            '<td>' + v.editorial + '</td>' +
                             '<td>' + v.categoria + '</td>' +
-                            '<td>' + v.id_situacion + '</td>' +
+                            '<td> <a href="#" class=""><i class="fa fa-close" style="color:red;"></i> </a></td>' +
                             '</tr>';
-                    })
+                    });
+
+                    $("#pedido").html(html);
 
                 })
             }

@@ -57,12 +57,15 @@ class Biblio extends CI_Controller {
     {
         $libro = $this->input->post('libro');       
         $pedido = array(
+                        'pedido'        => 0,
                         'libro'         => $libro,
                         'fecha'         => $this->m_ticket->fecha_actual(),
                         'capturista'    => $this->session->userdata('codigo')
         );
 
         $this->m_biblio->agregarPedido($pedido);
+
+        echo json_encode("listo");
     }
 
     function obtPedido()

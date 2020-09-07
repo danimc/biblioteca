@@ -50,7 +50,9 @@ $estados = $this->m_ticket->estatus();
                               <table class="table table-bordered table-hover dataTable no-footer dtr-inline" id="datatable" role="grid" aria-describedby="datatable_info" style="width: 1042px;">
                                 <thead class="thead-default thead-lg">
                                     <tr role="row">
-                                    
+                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 103.017px;" aria-label="Order ID: activate to sort column ascending">
+                                       CONS.
+                                    </th>                                    
                                     <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 103.017px;" aria-label="Order ID: activate to sort column ascending">
                                        TITULO
                                     </th>
@@ -80,7 +82,7 @@ $estados = $this->m_ticket->estatus();
                                     $estatus = $this->m_ticket->etiqueta($l->estatus);
                                     ?>
                                     <tr class="">
-                                     
+                                    <td > <?=$l->consecutivo?></td>
                                       <td > <?=$l->titulo?></td>
                                       <td ><?=$l->autor?></td>
                                       <td ><?=$l->editorial?></td>
