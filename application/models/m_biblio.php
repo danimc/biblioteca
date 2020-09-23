@@ -74,12 +74,26 @@ class m_biblio extends CI_Model {
         $this->db->insert('tb_solicitudPedidos', $pedido);
     }
 
+    function revisa_libro($libro)
+    {
+        $this->db->where('libro', $libro);
+        $this->db->where('pedido', 0);
+        return $this->db->get('tb_solicitudPedidos')->num_rows();
+    }
+
+    function quitar_pedido($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('tb_solicitudPedidos');
+    }
+
     function obt_Pedido()
     {
         $qry = "";
 
         $qry = "
         SELECT
+        p.id,
         l.consecutivo,
         l.titulo,
         a.nombre as autor,

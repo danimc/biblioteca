@@ -24,11 +24,10 @@
 
 
     <form role="form" id="form_newsletter">
-        <!-- Main content -->
         <section class="page-content fade-in-up">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="ibox ibox-fullheight">
+                    <div class="ibox">
                         <div class="ibox-head">
                             <div class="ibox-title">Datos del Solicitante</div>
                         </div>
@@ -37,7 +36,7 @@
                                 <div class="form-group mb-6 col-md-12 ">
                                     <label class="col-sm-12 col-form-label">Usuario: </label>
                                     <div class="col-sm-12">
-                                        <select class="form-control selectpicker col-sm-12" id="usrIncidente" data-live-search="true" name="usrIncidente">
+                                        <select class="form-control selectpicker col-sm-12" id="usrPrestamo" data-live-search="true" name="usrPrestamo">
                                             <option value="<?= $usuario->codigo ?>">
                                                 <?= $usuario->usuario ?> => <?= $usuario->nombre_completo ?>
                                             </option>
@@ -49,17 +48,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-
-
-                <div class="col-md-7">
-                    <div class="ibox ibox-fullheight">
-                        <div class="ibox-body">
-                            <div class="row">
                                 <div class="form-group col-md-12">
                                     <label>Consecutivo</label>
                                     <div class="input-group">
@@ -70,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label>Titulo</label>
+                                    <label>Título</label>
                                     <input type="text" name="titulo" id="titulo" class="form-control">
                                 </div>
                                 <div id="infoLibro">
@@ -88,30 +77,28 @@
                                             <b>Estatus: </b> <span id="txtEstatus"></span>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <a href="#" id="btnAgregar" class="btn btn-block btn-success"> Agregar </a>
+                                    <a href="#" id="btnAgregar" class="btn btn-block btn-success"> Agregar al pedido </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
+
+
+                <div class="col-md-7">
                     <div class="ibox">
-                        <div class="ibox-head">
-                            <div class="ibox-title">
-                                Lista de ejemplares a prestar
-                            </div>
+                        <div class="ibox ibox-head">
+                            <div class="ibox-title">Libros solicitados</div>
                         </div>
                         <div class="ibox-body">
                             <div class="row">
                                 <table class="table table-responsive table-hover">
                                     <tr>
                                         <th> Cons.</th>
-                                        <th>Titulo</th>
+                                        <th>Título</th>
                                         <th>Autor</th>
                                         <th>Editorial</th>
                                         <th>Categoria</th>
@@ -123,8 +110,31 @@
                             </div>
                         </div>
                         <div class="ibox-footer">
-                            <a class="btn btn-success"> Solicitar Prestamo</a> 
+                            <div class="row">
+                                <div class="col">
+                                    <a href="#" class="btn btn-danger btn-block col"> Cancelar y borrar prestamo</a>
+
+                                </div>
+                                <div class="col">
+                                    <a href="#" id="btnRegistrar" class="btn btn-success btn-block col"> Registrar Prestamo</a>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">
+
+                            </div>
+                        </div>
+                        <div class="ibox-body">
+
+                        </div>
+
                     </div>
                 </div>
 
@@ -169,11 +179,43 @@
                     url: '<?= base_url() ?>index.php/biblio/agregarPedido',
                     data,
                 }).done(function(respuesta) {
-                    //alert('hola');
+                    console.log(respuesta);
                     obtPedido();
-                    llenarDatos(falso = '');                    
+                    llenarDatos(falso = '');
                 })
             })
+
+            $("#btnRegistrar").click(function() {
+                opcion = $('select[name="usrPrestamo"] option:selected').text();
+                nombre = opcion.split('>');
+                usuario = $("#usrPrestamo").val();
+                alertify.confirm("PRESTAR LIBROS", "<p align='center'>va a prestar los libros a <b>" + nombre[1] + "</b> <br> ¿desea continuar?</p>",
+                    function() {
+                        guardarPedido(usuario);
+                        alertify.success('Eliminado');
+                    },
+                    function() {
+                        alertify.error('Cancelado');
+                    });                       
+            });
+
+            function guardarPedido(usr)
+            {
+                data = {
+                    usr
+                };
+
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: '<?= base_url() ?>index.php/biblio/guardarPedido',
+                    data,
+                }).done(function(respuesta) {
+                    console.log(respuesta);
+                    obtPedido();
+                    llenarDatos(falso = '');
+                }) 
+            }
 
             function llenarDatos(respuesta) {
 
@@ -190,6 +232,33 @@
                     $("#titulo").val('');
                     $("#txtAutor, #txtCategoria, #txtCategoria,#txtEditorial, #txtEstatus ").html('');
                 }
+
+            }
+
+            function quitar_pedido(id, titulo) {
+                alertify.confirm("QUITAR LIBRO DEL PEDIDO", "¿Seguro de deseas quitar  <b>" + titulo + "</b> de la solicitud de prestamo?",
+                    function() {
+                        quitaLibro(id);
+                        alertify.success('Eliminado');
+                    },
+                    function() {
+                        alertify.error('Cancelado');
+                    });
+            }
+
+            function quitaLibro(id) {
+                data = {
+                    id
+                };
+
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: '<?= base_url() ?>index.php/biblio/quitar_pedido',
+                    data,
+                }).done(function(respuesta) {
+                    obtPedido();
+                })
 
             }
 
@@ -212,7 +281,7 @@
                     dataType: 'json',
                     url: '<?= base_url() ?>index.php/biblio/obtPedido',
                 }).done(function(respuesta) {
-                   
+
                     html = '';
                     $.each(respuesta, function(i, v) {
                         html += '<tr>' +
@@ -221,7 +290,7 @@
                             '<td>' + v.autor + '</td>' +
                             '<td>' + v.editorial + '</td>' +
                             '<td>' + v.categoria + '</td>' +
-                            '<td> <a href="#" class=""><i class="fa fa-close" style="color:red;"></i> </a></td>' +
+                            '<td> <a href="#" onclick="quitar_pedido(' + v.id + ',`' + v.titulo + '`)" class=""><i class="fa fa-close" style="color:red;"></i> </a></td>' +
                             '</tr>';
                     });
 
@@ -230,24 +299,3 @@
                 })
             }
         </script>
-
-        <!-- <script>
-    $("#nombre").change(function () {   
-        busqueda = $("#nombre").val();
-        datos = { busqueda : busqueda,
-                  tipo     : 2   };
-        $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: '<?= base_url() ?>index.php/usuario/obt_usuario',
-        data: datos,
-          }).done(function(respuesta){
-            $("#usrIncidente").val(respuesta.codigo);
-            $("#extension").val(respuesta.extension);
-            $("#correo").val(respuesta.correo);
-            $("#extension").val(respuesta.extension);
-            $("#dependencia").val(respuesta.depId);
-          })
-     })
-</script>
- script de la impresora-->
